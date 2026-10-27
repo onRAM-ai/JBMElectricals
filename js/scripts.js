@@ -3,36 +3,12 @@
  * scripts.js
  *
  * Sections:
- *   1. Loading Screen
  *   2. Header — Scroll Behaviour
  *   3. Mobile Navigation
  *   4. Enquiry Form Validation
  *   5. Testimonial Rotator
  *   6. Scroll Animations
  */
-
-/* ── 1. LOADING SCREEN ───────────────────────────────── */
-/* Only runs on first visit in a session — skipped on all internal navigation */
-(function() {
-    var loader = document.getElementById("loader");
-    if (!loader) return;
-
-    if (sessionStorage.getItem("jbm_visited")) {
-        // Already visited — hide loader immediately, no animation
-        loader.classList.add("gone");
-        return;
-    }
-
-    // First visit — set the flag immediately then run the sequence
-    sessionStorage.setItem("jbm_visited", "1");
-    var ll = document.getElementById("ll");
-    var lt = document.getElementById("lt");
-    var lb = document.getElementById("lb");
-    setTimeout(function(){ ll.classList.add("show"); lt.classList.add("show"); }, 300);
-    setTimeout(function(){ lb.classList.add("run"); }, 450);
-    setTimeout(function(){ loader.classList.add("out"); }, 2350);
-    setTimeout(function(){ loader.classList.add("gone"); }, 3200);
-})();
 
 /* ── 2. HEADER — SCROLL BEHAVIOUR ────────────────────── */
 var header = document.getElementById("header");
