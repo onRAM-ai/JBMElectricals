@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-        <link rel="preload" href="assets/images/hero-bg-2.jpg" as="image">
+        <link rel="preload" href="assets/images/JBM-Finals-12.jpg" as="image">
     <link rel="stylesheet" href="css/styles.css">
     <style>
         /* Hero — interior page */
@@ -20,7 +20,7 @@
         .pg-hero-bg {
             position: absolute; inset: 0;
             background-color: var(--navy-deep);
-            background-image: url("assets/images/hero-bg-2.jpg");
+            background-image: url("assets/images/JBM-Finals-12.jpg");
             background-size: cover; background-position: center 40%;
         }
         .pg-hero-overlay {
@@ -330,12 +330,12 @@
     </div>
 </div>
 
-<!-- Gallery manifest — built and updated by CMS deploy hook; for now, hardcoded list -->
+<!-- Client gallery fallback; the renderer also loads current CMS entries. -->
 <script>
 /* Gallery file list — fetched live from GitHub via /api/content */
 window.JBM_GALLERY_FETCH = "/api/content?type=gallery";
-/* Branch-local entries remain available before a CMS main-branch merge. */
-window.JBM_GALLERY_FILES = ["commercial-gallery", "domestic-gallery", "industrial-gallery", "rural-gallery", "industrial-upgrade-01", "industrial-upgrade-02", "industrial-upgrade-03", "industrial-upgrade-04", "industrial-upgrade-05", "industrial-upgrade-06", "industrial-upgrade-07", "industrial-upgrade-08"];
+/* Client-supplied project photographs remain available if the listing API is unavailable. */
+window.JBM_GALLERY_FILES = ["industrial-upgrade-01","industrial-upgrade-02","industrial-upgrade-03","industrial-upgrade-04","industrial-upgrade-05","industrial-upgrade-06","industrial-upgrade-07","industrial-upgrade-08"];
 </script>
 
 <section id="cta">
@@ -350,7 +350,7 @@ window.JBM_GALLERY_FILES = ["commercial-gallery", "domestic-gallery", "industria
         </div>
     </div>
     <div class="cta-right">
-        <img class="cta-img" src="assets/images/cta-bg.webp" alt="JBM Electrical team at work" loading="lazy" onerror="this.style.display='none'">
+        <img class="cta-img" src="assets/images/JBM-Finals-15.jpg" alt="JBM electrician working on an electrical switchboard" loading="lazy" onerror="this.style.display='none'">
         <div class="cta-img-overlay"></div>
     </div>
 </section>
