@@ -369,6 +369,9 @@ document.querySelectorAll(".fade-up").forEach(function(el) {
             var s   = JBM_SERVICES[id];
             var snip = paras(s.intro)[0].split(".")[0] + ".";
             html += "<a href=\"#" + id + "\" class=\"sp-card\">";
+            if (s.image) {
+                html += "<img class=\"sp-card-photo\" src=\"" + s.image + "\" alt=\"" + s.imageAlt + "\" width=\"2048\" height=\"1366\" loading=\"lazy\">";
+            }
             html += "<div class=\"sp-card-title\">" + s.title + "</div>";
             html += "<div class=\"sp-card-intro\">" + snip + "</div>";
             html += "<div class=\"sp-card-arrow\">View service <svg viewBox=\"0 0 24 24\"><path d=\"M5 12h14M12 5l7 7-7 7\"/></svg></div>";
@@ -400,17 +403,26 @@ document.querySelectorAll(".fade-up").forEach(function(el) {
             relHtml += "</div></div>";
         }
 
+        var imageHtml = s.image
+            ? "<img class=\"sp-detail-photo\" src=\"" + s.image + "\" alt=\"" + s.imageAlt + "\" width=\"2048\" height=\"1366\" loading=\"lazy\">"
+            : "";
+        var galleryHtml = (s.gallery || []).map(function(photo) {
+            return "<figure class=\"sp-project-photo\"><img src=\"" + photo.image + "\" alt=\"" + photo.alt + "\" width=\"2048\" height=\"1536\" loading=\"lazy\"><figcaption>" + photo.caption + "</figcaption></figure>";
+        }).join("");
+
         contentEl.innerHTML =
             "<div class=\"sp-detail\">" +
             "<div class=\"sp-detail-eyebrow\">" + JBM_CATEGORY + "</div>" +
             "<h2 class=\"sp-detail-title\">" + s.title + "</h2>" +
             paraHtml("sp-detail-intro", s.intro) +
+            imageHtml +
             "<div class=\"sp-includes-wrap\">" +
             "<div class=\"sp-includes-label\">What\'s Included</div>" +
             paraHtml("sp-includes-lead", s.lead) +
             "<div class=\"sp-includes-grid\">" + itemsHtml + "</div>" +
             "</div>" +
             paraHtml("sp-detail-outro", s.outro) +
+            galleryHtml +
             relHtml +
             "</div>";
 
@@ -724,9 +736,17 @@ function jbmFormatDate(dateStr) {
 
     /* Step 1: get the list of files from the API, then load each one */
     var fetchUrl = window.JBM_GALLERY_FETCH || null;
+    var localFiles = window.JBM_GALLERY_FILES || [];
     var filesPromise = fetchUrl
-        ? fetch(fetchUrl).then(function(r) { return r.json(); }).then(function(d) { return d.files || []; })
-        : Promise.resolve(window.JBM_GALLERY_FILES || []);
+        ? fetch(fetchUrl).then(function(r) {
+            if (!r.ok) throw new Error("Gallery list unavailable");
+            return r.json();
+        }).then(function(d) {
+            return (d.files || []).concat(localFiles).filter(function(slug, index, all) {
+                return all.indexOf(slug) === index;
+            });
+        }).catch(function() { return localFiles; })
+        : Promise.resolve(localFiles);
 
     filesPromise.then(function(slugs) {
         return Promise.all(slugs.map(function(slug) {
@@ -901,3 +921,4 @@ function jbmFormatDate(dateStr) {
             contentEl.innerHTML = "<div class='post-loading'>Post not found. <a href='blog.html' style='color:var(--amber)'>Back to blog</a></div>";
         });
 })();
+

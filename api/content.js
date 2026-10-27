@@ -8,7 +8,7 @@ export default async function handler(req, res) {
         return;
     }
 
-    const repo   = "framelywebdesigns/JBMElectricals";
+    const repo   = "onRAM-ai/JBMElectricals";
     const branch = "main";
     const path   = `content/${type}`;
     const url    = `https://api.github.com/repos/${repo}/contents/${path}?ref=${branch}`;
@@ -41,3 +41,4 @@ export default async function handler(req, res) {
         res.status(500).json({ error: err.message });
     }
 }
+

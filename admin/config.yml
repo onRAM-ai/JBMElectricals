@@ -3,9 +3,9 @@
 # Backend: GitHub OAuth via our own Vercel functions
 backend:
   name: github
-  repo: framelywebdesigns/JBMElectricals
+  repo: onRAM-ai/JBMElectricals
   branch: main
-  base_url: https://jbm-electricals.vercel.app
+  base_url: https://jbm-client-preview.vercel.app
   auth_endpoint: /api/auth
 
 # Where uploaded media goes
@@ -13,8 +13,8 @@ media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
 # Site URL
-site_url: https://jbm-electricals.vercel.app
-display_url: https://jbm-electricals.vercel.app
+site_url: https://jbm-client-preview.vercel.app
+display_url: https://jbm-client-preview.vercel.app
 logo_url: /assets/images/jbm-logo.svg
 
 # Content collections
@@ -54,3 +54,4 @@ collections:
       - {label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: false, default: "{{now}}"}
       - {label: "Excerpt", name: "excerpt", widget: "text", hint: "A short summary shown on the blog listing. Keep it to 1-2 sentences"}
       - {label: "Body", name: "body", widget: "markdown", modes: ["rich_text"], editor: {preview: false}}
+
